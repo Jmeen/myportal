@@ -24,6 +24,7 @@
 			</plugin>
 		</plugins>
 	</build>
+
 	<!-- Oracle 드라이버 저장소 -->
 	<repositories>
 		<repository>
@@ -33,20 +34,24 @@
 		</repository>
 	</repositories>
 
+	<!-- 의존성 목록 -->
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+		<!-- Spring Context -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+
+		<!-- Spring Web -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+
+		<!-- Spring WebMVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -61,16 +66,14 @@
 			<version>1.2</version>
 		</dependency>
 
-		<!-- spring JDBC -->
+		<!-- Spring JDBC -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>5.3.10</version>
+			<version>${org.springframework-version}</version>
 		</dependency>
 
-		<!-- Oracle Dirver -->
-		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
 		<!-- Oracle Driver -->
 		<dependency>
 			<groupId>oracle</groupId>
@@ -78,6 +81,7 @@
 			<version>11.2.0.3</version>
 		</dependency>
 
+		<!-- MyBatis -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -85,6 +89,7 @@
 			<version>3.5.7</version>
 		</dependency>
 
+		<!-- MyBatis Spring -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -92,6 +97,13 @@
 			<version>2.0.6</version>
 		</dependency>
 
+		<!-- Jackson -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.12.5</version>
+		</dependency>
 
 	</dependencies>
 </project>
