@@ -3,19 +3,19 @@ package com.bitacademy.myportal.exception;
 import com.bitacademy.myportal.repository.UserVo;
 
 // UserDao에ㅐ서 SQLException 발생시 전환할 구체적 Exception Class
-public class UserDaoExeption extends RuntimeException {
+public class UserDaoException extends RuntimeException {
 	// 구체적 상황 정보
 	private UserVo userVo = null;
 
-	public UserDaoExeption() {
+	public UserDaoException() {
 		super();
 	}
 
-	public UserDaoExeption(String message) {
+	public UserDaoException(String message) {
 		super(message);
 	}
 
-	public UserDaoExeption(String message, UserVo vo) {
+	public UserDaoException(String message, UserVo vo) {
 		super(message);
 		userVo = vo;
 	}

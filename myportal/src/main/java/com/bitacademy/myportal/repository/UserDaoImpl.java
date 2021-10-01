@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.bitacademy.myportal.exception.UserDaoExeption;
+import com.bitacademy.myportal.exception.UserDaoException;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 //			상황 정보 담은 구체적 예외 전환
-			throw new UserDaoExeption("회원가입중 오류", vo);
+			throw new UserDaoException("회원가입중 오류", vo);
 		}
 		// TODO: 예외처리 필요
 
@@ -32,8 +32,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public UserVo selectUser(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		UserVo vo = sqlSession.selectOne("users.selectUserByEmail", email);
+		return vo;
 	}
 
 	@Override
