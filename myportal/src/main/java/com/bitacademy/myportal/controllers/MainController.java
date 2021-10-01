@@ -28,7 +28,7 @@ public class MainController {
 		try {
 			int result = 4 / 0; // 예외발생
 		} catch (Exception e) {
-			throw new CustomException("MainControllerError!!");
+			throw new CustomException("MainController Error!!");
 		}
 		return "Exception Text";
 	}
@@ -41,10 +41,10 @@ public class MainController {
 //	}
 
 //	컨트롤러의 예외처리 v2
-	@ExceptionHandler(CustomException.class)
-	public String handleControllerException(CustomException e, Model model) {
-		model.addAttribute("name", e.getClass().getSimpleName());
-		model.addAttribute("message", e.getMessage());
-		return "errors/exception";
-	}
+//	@ExceptionHandler(CustomException.class)
+//	public String handleControllerException(CustomException e, Model model) {
+//		model.addAttribute("name", e.getClass().getSimpleName());
+//		model.addAttribute("message", e.getMessage());
+//		return "errors/exception";
+//	}
 }
