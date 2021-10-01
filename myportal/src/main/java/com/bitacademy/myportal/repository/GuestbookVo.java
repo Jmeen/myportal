@@ -3,13 +3,13 @@ package com.bitacademy.myportal.repository;
 import java.util.Date;
 
 public class GuestbookVo {
-	private Long no; // primary Key
+	private Long no; // Primary Key
 	private String name;
 	private String password;
 	private String content;
 	private Date regDate;
 
-	public GuestbookVo() { // POJO의 경우, 기본생성자가 반드시 있어야한다.
+	public GuestbookVo() { // POJO의 경우, 기본생성자 반드시 있어야 한다.
 		super();
 	}
 
@@ -28,11 +28,9 @@ public class GuestbookVo {
 
 	// 전체 생성자
 	public GuestbookVo(Long no, String name, String password, String content, Date regDate) {
-		this.no = no;
-		this.name = name;
-		this.password = password;
-		this.content = content;
+		this(name, password, content);
 		this.regDate = regDate;
+		this.no = no;
 	}
 
 	public Long getNo() {

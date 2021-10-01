@@ -3,12 +3,12 @@ package com.bitacademy.myportal.repository;
 import java.util.Date;
 
 public class UserVo {
-	private Long no; // primary Key
+	private Long no; // Primary Key
 	private String name;
 	private String email;
 	private String password;
 	private String gender;
-	private Date createdAt;
+	private Date createAt;
 
 	public Long getNo() {
 		return no;
@@ -50,18 +50,18 @@ public class UserVo {
 		this.gender = gender;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
+	public Date getCreateAt() {
+		return createAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
 	}
 
 	@Override
 	public String toString() {
 		return "UserVo [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", gender="
-				+ gender + ", createdAt=" + createdAt + "]";
+				+ gender + ", createAt=" + createAt + "]";
 	}
 
 }

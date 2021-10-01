@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 public class GuestbookDaoImpl implements GuestbookDao {
 	@Autowired
 	SqlSession sqlSession;
+
 	@Override
 	public List<GuestbookVo> selectAll() {
-		// TODO Auto-generated method stub
 		List<GuestbookVo> list = sqlSession.selectList("guestbook.selectAll");
 		return list;
 	}
@@ -28,7 +28,5 @@ public class GuestbookDaoImpl implements GuestbookDao {
 		int deletedCount = sqlSession.delete("guestbook.delete", vo);
 		return deletedCount;
 	}
-	
-
 
 }

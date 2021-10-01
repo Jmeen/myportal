@@ -10,28 +10,28 @@ import com.bitacademy.myportal.repository.GuestbookDao;
 import com.bitacademy.myportal.repository.GuestbookVo;
 
 @Service
-public class GuestbookSeviceImpl implements GuestbookService {
-
+public class GuestbookServiceImpl implements GuestbookService {
 	@Autowired
-	GuestbookDao GuestbookDaoImpl;
+	GuestbookDao guestbookDaoImpl;
 
 	@Override
-	public List<GuestbookVo> GetMessageLIst() {
-		List<GuestbookVo> list = GuestbookDaoImpl.selectAll();
+	public List<GuestbookVo> getMessageList() {
+		List<GuestbookVo> list = guestbookDaoImpl.selectAll();
 		return list;
 	}
 
 	@Transactional
 	@Override
 	public boolean writeMessage(GuestbookVo vo) {
-		int insertedCount = GuestbookDaoImpl.insert(vo);
+		int insertedCount = guestbookDaoImpl.insert(vo);
 		System.out.println("삽입된 방명록 레코드:" + insertedCount);
 		return 1 == insertedCount;
 	}
 
 	@Override
 	public boolean deleteMessage(GuestbookVo vo) {
-		int deletedCount = GuestbookDaoImpl.delete(vo);
+		int deletedCount = guestbookDaoImpl.delete(vo);
 		return 1 == deletedCount;
 	}
+
 }

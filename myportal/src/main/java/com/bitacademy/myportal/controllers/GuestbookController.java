@@ -1,4 +1,4 @@
-package com.bitacademy.myportal.controller;
+package com.bitacademy.myportal.controllers;
 
 import java.util.List;
 
@@ -12,47 +12,46 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bitacademy.myportal.repository.GuestbookVo;
 import com.bitacademy.myportal.service.GuestbookService;
-import com.bitacademy.myportal.service.GuestbookSeviceImpl;
 
 @RequestMapping("/guestbook")
 @Controller
-public class GuestBookcontroller {
+public class GuestbookController {
 	@Autowired
-	GuestbookService GuestbookserviceImpl;
-
-	@RequestMapping({ "", "/", "/list" })
+	GuestbookService guestbookServiceImpl;
+	
+	@RequestMapping({"", "/", "/list"})
 	public String list(Model model) {
-		List<GuestbookVo> list = GuestbookserviceImpl.GetMessageLIst();
+		List<GuestbookVo> list = guestbookServiceImpl.getMessageList();
 		System.out.println(list);
 		model.addAttribute("list", list);
 		return "guestbook/list";
 	}
-
-	@RequestMapping(value = "/write", method = RequestMethod.POST)
+	
+	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String write(@ModelAttribute GuestbookVo vo) {
 		System.out.println("FORM DATA:" + vo);
-
-		boolean bSuccess = GuestbookSeviceImpl.writeMessage(vo);
+		
+		boolean bSuccess = guestbookServiceImpl.writeMessage(vo);
 		System.out.println("방명록 삽입 성공? " + bSuccess);
-
-		// 리다이렉트
+		
+		//	리다이렉트
 		return "redirect:/guestbook";
 	}
-
-	@RequestMapping(value = "/delete/{no}", method = RequestMethod.GET)
+	
+	@RequestMapping(value="/delete/{no}", method=RequestMethod.GET)
 	public String delete(@PathVariable("no") Long no, Model model) {
 		model.addAttribute("no", no);
 		return "guestbook/deleteform";
 	}
-
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public String delete(@ModelAttribute GuestbookVo vo) {
-		boolean bSuccess = GuestbookSeviceImpl.deleteMessage(vo);
-
-		if (bSuccess) { // 삭제 성공
+		boolean bSuccess = guestbookServiceImpl.deleteMessage(vo);
+		
+		if (bSuccess) {	//	삭제 성공
 			return "redirect:/guestbook";
 		}
-		// 실패시
+		//	실패시
 		return "redirect:/guestbook/delete/" + vo.getNo();
 	}
 }
