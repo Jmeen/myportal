@@ -3,16 +3,16 @@ package com.bitacademy.myportal.repository;
 import java.util.Date;
 
 public class BoardVo {
-	private Long no;
+	private Long no; // PK
 	private String title;
 	private String content;
-	private Long hit;
+	private Long hit; // 조회수
 	private Date regDate;
-	private Long userNo;
+	private Long userNo; // User테이블의 PK (Foreign Key)
 	private String userName;
 
 	public BoardVo() {
-		super();
+
 	}
 
 	public BoardVo(String title, String content, Long userNo) {
@@ -30,6 +30,7 @@ public class BoardVo {
 		this.userName = userName;
 	}
 
+	// 전체 생성자
 	public BoardVo(Long no, String title, String content, Long hit, Date regDate, Long userNo, String userName) {
 		this(no, title, hit, regDate, userNo, userName);
 		this.content = content;

@@ -11,9 +11,9 @@ import com.bitacademy.myportal.repository.UserVo;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDaoImpl;
-
+	
 	@Override
-	public boolean join(UserVo vo) throws UserDaoException{
+	public boolean join(UserVo vo) throws UserDaoException {
 		int insertedCount = userDaoImpl.insert(vo);
 		return 1 == insertedCount;
 	}

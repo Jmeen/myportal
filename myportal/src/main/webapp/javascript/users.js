@@ -5,7 +5,7 @@ function checkEmail(obj, url) {
 		alert("이메일을 입력하세요")
 		return;
 	}
-
+	
 	//	Ajax로 url에 중복 이메일 검사
 	$.ajax({
 		url: url,
@@ -16,7 +16,7 @@ function checkEmail(obj, url) {
 		},
 		success: function(response) {
 			console.log(response);
-
+			
 			if (response.data) {	//	true: 이미 가입한 이메일
 				alert("이미 가입된 이메일입니다.");
 			} else {	// false: 가입되지 않은 이메일

@@ -11,40 +11,40 @@ import com.bitacademy.myportal.exception.CustomException;
 
 @Controller
 public class MainController {
-	@RequestMapping({ "/", "/main" })
+	@RequestMapping({"/", "/main"})
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView();
 //		mav.setViewName("/WEB-INF/views/home.jsp");
-		mav.setViewName("home"); // ViewResolver가 prefix와 suffix 조함 -> 완전한 ViewName 리턴
+		mav.setViewName("home");	//	ViewResolver가 prefix와 suffix 조함 -> 완전한 ViewName 리턴
 		return mav;
 	}
-
-//	예외 강제 발생(테스트용)
+	
+	//	예외 강제 발생 (테스트용)
 	@RequestMapping("/except")
 	@ResponseBody
 	public String except() {
-//		RUntimeExpeption으로 전환
-//		보다 구체적 예외로 전환하여 처리하는것이 바람직
+		//	RuntimeException으로 전환
+		//	-> 보다 구체적 예외로 전환하여 처리하는 것이 바람직
 		try {
-			int result = 4 / 0; // 예외발생
+			int result = 4 / 0;	//	예외 발생
 		} catch (Exception e) {
-			throw new CustomException("MainController Error!!");
+			throw new CustomException("MainController Error");
 		}
-		return "Exception Text";
+		return "Exception Test";
 	}
-
-	// 컨트롤러의 예외처리 v1
-//	@ExceptionHandler(Exception.class)
-//	@ResponseBody
-//	public String handleControllerException(Exception e) {
-//		return "Exception : " + e.getMessage();
-//	}
-
-//	컨트롤러의 예외처리 v2
+	
+	//	컨트롤러의 예외처리 v2
 //	@ExceptionHandler(CustomException.class)
-//	public String handleControllerException(CustomException e, Model model) {
+//	public String handleControllerException(CustomException e,
+//			Model model) {
 //		model.addAttribute("name", e.getClass().getSimpleName());
 //		model.addAttribute("message", e.getMessage());
 //		return "errors/exception";
+//	}
+	//	컨트롤러의 예외처리 v1
+//	@ExceptionHandler(Exception.class) 
+//	@ResponseBody
+//	public String handleControllerException(Exception e) {
+//		return "Exception: " + e.getMessage();
 //	}
 }

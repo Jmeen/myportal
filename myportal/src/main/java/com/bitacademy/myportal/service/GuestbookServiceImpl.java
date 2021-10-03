@@ -13,13 +13,13 @@ import com.bitacademy.myportal.repository.GuestbookVo;
 public class GuestbookServiceImpl implements GuestbookService {
 	@Autowired
 	GuestbookDao guestbookDaoImpl;
-
+	
 	@Override
 	public List<GuestbookVo> getMessageList() {
 		List<GuestbookVo> list = guestbookDaoImpl.selectAll();
 		return list;
 	}
-
+	
 	@Transactional
 	@Override
 	public boolean writeMessage(GuestbookVo vo) {
