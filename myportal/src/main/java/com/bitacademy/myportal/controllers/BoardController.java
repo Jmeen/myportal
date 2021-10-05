@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,6 +21,43 @@ import com.bitacademy.myportal.service.BoardService;
 public class BoardController {
 	@Autowired
 	private BoardService boardServiceImpl;
+
+	@RequestMapping(value = "/delete/{no}")
+	public String delete(@PathVariable Long no) {
+
+		boolean deleteSuccess = boardServiceImpl.delete(no);
+		if (deleteSuccess) {
+			return "redirect:/board";
+		}
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(@ModelAttribute BoardVo vo) {
+		boolean updateSuccess = boardServiceImpl.update(vo);
+		if (updateSuccess) {
+			return "redirect:/board/" + vo.getNo();
+		}
+		return "redirect:/board";
+
+	}
+
+	@RequestMapping(value = "/update/{boardIndex}", method = RequestMethod.GET)
+	public String updateForm(@PathVariable Long boardIndex, Model model) {
+
+		model.addAttribute("boardNo", boardIndex);
+
+		return "/board/modify";
+	}
+
+	@RequestMapping("/{boardIndex}")
+	public String view(@PathVariable Long boardIndex, Model model) {
+
+		BoardVo content = boardServiceImpl.getContent(boardIndex);
+		model.addAttribute("content", content);
+
+		return "/board/view";
+	}
 
 	@RequestMapping({ "", "/", "/list" })
 	public String list(Model model) {

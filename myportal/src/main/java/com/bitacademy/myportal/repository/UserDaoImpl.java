@@ -13,25 +13,25 @@ import com.bitacademy.myportal.exception.UserDaoException;
 public class UserDaoImpl implements UserDao {
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	@Override
 	public int insert(UserVo vo) {
 		int count = 0;
-		
+
 		try {
 			count = sqlSession.insert("users.insert", vo);
 		} catch (Exception e) {
 			e.printStackTrace();
-			//	상황 정보를 담은 구체적 예외로 전환
+			// 상황 정보를 담은 구체적 예외로 전환
 			throw new UserDaoException("회원 가입 중 오류!", vo);
 		}
-		
+
 		return count;
 	}
 
 	@Override
 	public UserVo selectUser(String email) {
-		UserVo vo = sqlSession.selectOne("users.selectUserByEmail", email);
+		UserVo vo = sqlSession.selectOne("users.selectUserByEmsail", email);
 		return vo;
 	}
 
@@ -41,9 +41,14 @@ public class UserDaoImpl implements UserDao {
 		Map<String, String> userMap = new HashMap<>();
 		userMap.put("email", email);
 		userMap.put("password", password);
-		
+
 		UserVo vo = sqlSession.selectOne("users.selectUserByEmailAndPassword", userMap);
 		return vo;
 	}
 
+	@Override
+	public int update(UserVo vo) {
+		int updatedCount = sqlSession.update("users.update", vo);
+		return updatedCount;
+	}
 }
