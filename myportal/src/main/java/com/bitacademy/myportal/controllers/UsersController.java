@@ -1,13 +1,19 @@
 package com.bitacademy.myportal.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,23 +28,36 @@ import com.bitacademy.myportal.service.UserService;
 @RequestMapping("/users")
 public class UsersController {
 //	로거 세팅:org.slf4j.Lgger 인터페이스
-	private static final Logger logger =
-			LoggerFactory.getLogger(UsersController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
 	@Autowired
 	private UserService userServiceImpl;
 
 	@RequestMapping(value = { "", "/", "/join" }, method = RequestMethod.GET)
-	public String joinForm() {
+	public String joinForm(@ModelAttribute UserVo vo) {
 		// 로그 레벨에 따라 메서드가 마련
 		logger.debug("회원가입폼");
 		return "users/joinform";
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String joinAction(@ModelAttribute UserVo userVo) {
+	public String joinAction(@ModelAttribute @Valid UserVo userVo, BindingResult result, // 검증 결과 객체
+			Model model) {
 //		System.out.println("가입 폼:" + userVo);
 		logger.debug("회원가입액션");
 		logger.debug("가입 폼:" + userVo);
+
+		// 폼 검증 결과 확인
+		if (result.hasErrors()) { // 검증이 실패
+			// 에러 목록 받아오기
+			List<ObjectError> list = result.getAllErrors();
+			for (ObjectError e : list) {
+				logger.error("검증에러:" + e);
+			}
+			// 에러 정보를 Model에 적재
+			model.addAllAttributes(result.getModel());
+			return "users/joinform";
+
+		}
 		boolean bSuccess = false;
 		try {
 			bSuccess = userServiceImpl.join(userVo);
@@ -69,12 +88,11 @@ public class UsersController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginAction(@RequestParam(value = "email", required = false) String email,
 			@RequestParam(value = "password", required = false) String password, HttpSession session) {
-		
-		
+
 //		
 //		System.out.println("email:" + email);
 //		System.out.println("password:" + password);
-		
+
 		logger.debug("email:" + email);
 		logger.debug("password:" + password);
 
