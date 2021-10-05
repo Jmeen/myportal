@@ -44,7 +44,7 @@
 	q<!-- 작성한 로거가 사용될 패키지와 레벨을 지정 -->
 	<logger name="com.bitacademy.myportal" level="DEBUG">
 		<appender-ref ref="ConsoleAppender" />
-		<appender-ref ref="fileAppender" />
+		<!--  appender-ref ref="fileAppender" /-->
 	</logger>
 	<!-- 가장 적합한 -->
 	<!--logger name="com.bitacademy.myportal" level="TRACE"> <appender-ref ref="fileAppender" 
