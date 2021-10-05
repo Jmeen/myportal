@@ -35,7 +35,7 @@ public class BoardController {
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		if (authUser == null) {
 			System.err.println("로그인 사용자가 아님!");
-			return "redirect:/";
+			return "redirect:/user/login";
 		}
 		
 		return "board/write";

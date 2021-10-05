@@ -5,7 +5,7 @@
 	<insert id="insert" parameterType="userVo">
 	INSERT INTO users(no, name, password, email, gender)
 	VALUES(seq_users_pk.nextval, 
-		#{name}, 
+		#{name},     
 		#{password}, 
 		#{email}, 
 		#{gender})
