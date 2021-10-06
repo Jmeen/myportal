@@ -67,6 +67,21 @@
 		<property name="basenames" value="messages/messages_ko" />
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
+
+
+	<!-- Multipart resolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 최대 업로드 사이즈 -->
+		<property name="maxUploadSize" value="10485760" /> <!-- 10MB -->
+		<!-- 기본 인코딩 -->
+		<property name="defaultEncoding" value="UTF-8" />
+
+	</bean>
+
+	<!-- 리소스 맵핑 -->
+<mvc:resources mapping="/upload/**" location="file:D:/upload/" />
+
 </beans>
 
 
@@ -74,3 +89,4 @@
 
 
 
+ 
